@@ -1,6 +1,6 @@
 {
     "files.associations": {
-        "basics.C": "cpp",
-        "exampleExperiment.C": "cpp"
+        "exampleExperiment.C": "cpp",
+        "basics.C": "cpp"
     }
 }
