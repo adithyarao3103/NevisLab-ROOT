@@ -1,0 +1,33 @@
+User-agent: *
+# If you're crawling through our site, delay
+# this number of seconds between each page.
+Crawl-delay: 2
+Disallow: /query
+Disallow: private
+
+# 11-Aug-2023 WGS: Block OpenAI
+User-agent: GPTBot
+Disallow: /
+User-agent: ChatGPT-user
+Disallow: /
+
+# Block Google Bard AI
+User-agent: Google-Extended
+Disallow: /
+
+# Block Common Crawl
+User-agent: CCBot
+Disallow: /
+
+User-agent: Yandex
+Disallow: /
+
+User-agent: cubebot
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
+
+# 03-Mar-2000 WGS: Allow the CERN ATLAS Search engine to index us.
+User-agent: atlasdig      
+Disallow:

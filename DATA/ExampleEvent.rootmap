@@ -1,0 +1,5 @@
+[ libExampleEvent.so ]
+# List of selected classes
+class ExampleEvent
+class ExampleParticle
+header ExampleEvent.h

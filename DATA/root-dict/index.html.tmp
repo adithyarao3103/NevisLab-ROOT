@@ -1,0 +1,35 @@
+<h1 id="examples-of-working-with-root-dictionaries">Examples of working with ROOT dictionaries</h1>
+<p>28-Feb-2024 William Seligman</p>
+<p>This directory (at Nevis, <code>~seligman/root-class/root-dict</code>) is an extension of my <a href="https://www.nevis.columbia.edu/~seligman/root-class/">ROOT tutorial</a>. It follows in logical succession from the last Expert Exercise. The files herein contains various examples of how to create ROOT TTrees that contain more complex structures than simple numeric or vector values.</p>
+<p>There are two different approaches to creating ROOT I/O dictionaries for your custom classes. They’re both discussed below:</p>
+<ul>
+<li><p>Dynamically generate the dictionary at the time the program executes. This can be more convenient, but it takes longer.</p></li>
+<li><p>Pre-compile the dictionary into a shared library that’s incorporated into your program when you compile it. This is faster, but it takes a couple of extra compilation steps and you have create a <code>LinkDef</code> file.</p></li>
+</ul>
+<p>The files are listed below in the rough order that I think will teach you how to create your own TTrees. Go through the files, read the comments, and run the example commands in the files’ comments.</p>
+<p>For more information:</p>
+<ul>
+<li><p><a href="https://root.cern/manual/io_custom_classes/">Creating your own custom classes</a>.</p></li>
+<li><p><a href="https://root.cern.ch/root/htmldoc/guides/users-guide/AddingaClass.html">Using rootcling</a> from the old <a href="https://root.cern/root/htmldoc/guides/users-guide/ROOTUsersGuide.html">ROOT User’s Guide</a>.</p>
+<p>This is somewhat obsolete, but I think it offers a more coherent explanation.</p></li>
+<li><p>The <a href="https://man.archlinux.org/man/extra/root/rootcling.1.en">rootcling man page</a>.</p></li>
+<li><p><a href="https://www.geeksforgeeks.org/the-c-standard-template-library-stl/">STL</a> stands for “Standard Template Library”. It’s an extension of the formal original C++ language. It includes highly useful language features like std::vector, std::map, and std::string.</p>
+<p>If you’re a Python programmer, it may help to think of STL as something like numpy: It may not be part of the base language, but it’s so useful that it’s hard to think of programming without it.</p></li>
+</ul>
+<h2 id="the-basic-definition">The basic definition</h2>
+<p><a href="./STL_TrackList.h">STL_TrackList.h</a> = This defines an example class that might be used for a simple definition for detector tracks and the steps within those tracks. It’s intended as a coding example, and has little to do with actual physics.</p>
+<p><a href="./STLntupleTypes.h">STLntupleTypes.h</a> = This file contains a few custom type definitions to make some of the code lines shorter.</p>
+<h2 id="generating-dictionaries-dynamically">Generating dictionaries dynamically</h2>
+<p><a href="./STLntuple.icc">STLntuple.icc</a> = This is a C++ code-include file. It contains common C++ executable code for dynamically generating ROOT dictionaries for the class we’re writing and reading to the example ROOT TTree. You’ll see it included in both of the following files:</p>
+<p><a href="./STLntupleCreate.cxx">STLntupleCreate.cxx</a> = A program that creates a TTree with various complex C++ classes as branches.</p>
+<p><a href="./STLntupleRead.cxx">STLntupleRead.cxx</a> = A program to read that TTree and make various histograms to test that everything works.</p>
+<p><a href="./STLntupleRead.py">STLntupleRead.py</a> = A Python program that does the same thing as the above C++ program.</p>
+<p><a href="./STLntupleRDF.cxx">STLntupleRDF.cxx</a> = This is an example of using RDataFrame to read a TTree. Since that would be too easy once you understand <code>STLntupleRead</code>, I go further and demonstrate how to write multi-threaded code for making histograms.</p>
+<h2 id="generating-dictionary-libraries">Generating dictionary libraries</h2>
+<p>In the programs in the previous section, the dictionaries would be generated automatically if they didn’t already exist. But the dictionary-generating process takes time. While that’s fine for interactive or infrequent use, it’s not suitable if you want to create batch jobs for working with millions of events.</p>
+<p>The files listed below are an example of how to generate dictionary libraries which are included in a program’s executable when it is compiled and linked, or (in the case of Python) can be loaded quickly.</p>
+<p><a href="./STL_LinkDef.h">STL_LinkDef.h</a> = This is an example of a <code>LinkDef</code> file. A file like this is required if you’re going to create a compiled dictionary for ROOT I/O on anything more complicated than simple values (int, float, double, std::string) or vectors. It defines the C++ structures for which <code>rootcling</code> will generate dictionaries.</p>
+<p><a href="./STLntupleCreateDict.cxx">STLntupleCreateDict.cxx</a> = The same as <code>STLntupleCreate</code>, except that it uses the pre-compiled dictionary instead of dynamically creating dictionaries.</p>
+<p><a href="./STLntupleReadDict.cxx">STLntupleReadDict.cxx</a> = The same as <code>STLntupleRead</code>, except that it uses the pre-compiled dictionary instead of dynamically creating dictionaries.</p>
+<p><a href="./STLntupleReadDict.py">STLntupleReadDict.py</a> = A Python program that does the same thing as the above C++ program.</p>
+<p>The ROOT files created by the programs in this section have different names (they have <code>Dict</code> appended to the name), but they are functionally the same as the ROOT files created with the dynamically-generated dictionaries (up to the random numbers potentially being different in the two <code>Create</code> programs). If you want to fiddle with the TFile::Open statements in the programs, the <code>.root</code> files created by the programs using dynamically-generated dictionaries can be read by the programs using the shared-library dictionaries, and vice versa.</p>
