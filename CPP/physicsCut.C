@@ -5,7 +5,7 @@ void physicsCut() {
     TH2D* hist_ac = nullptr;
 
     // Initialisations
-    c = new TCanvas();
+    c = new TCanvas("c", "c", 800, 400);
     c->Divide(2,0);
     hist_bc = new TH2D("hist", "chi2 vs theta before cut", 500, 0., 0.24, 500, 0., 20.);
     hist_ac = new TH2D("hist", "chi2 vs theta after cut", 500, 0., 0.18, 500, 0., 2.);
@@ -45,4 +45,8 @@ void physicsCut() {
     hist_ac->GetYaxis()->SetTitle("chi2");
 
     c->SaveAs("CPP/OUTPUTS/PhysicsCut.png");
+    TFile file1("CPP/OUTPUTS/output.root","UPDATE");
+    hist_bc->Write();
+    hist_ac->Write();
+    file1.Close();
 }

@@ -7,7 +7,7 @@ void AnalyzeReader() {
     Int_t zvCount;
 
     // Initialisations
-    c = new TCanvas();
+    c = new TCanvas("c", "c", 1200, 400);
     c->Divide(3,0);
 
     zvCount = 0;
@@ -55,4 +55,10 @@ void AnalyzeReader() {
     std::cout<<"Number of zv<20: "<<zvCount;
 
     c->SaveAs("CPP/OUTPUTS/analyzeReader_cuts.png");
+    TFile file1("CPP/OUTPUTS/output.root","UPDATE");
+    ebeamHist->Write();
+    ptHist->Write();
+    zvHist_withCut->Write();
+    file1.Close();
+
 }

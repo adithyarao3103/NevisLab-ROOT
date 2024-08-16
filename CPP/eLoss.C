@@ -33,4 +33,7 @@ void eLoss(){
     hist->GetYaxis()->SetTitle("zv");
 
     c->SaveAs("CPP/OUTPUTS/eloss.png");
+    TFile file1("CPP/OUTPUTS/output.root","UPDATE");
+    hist->Write();
+    file1.Close();
 }
