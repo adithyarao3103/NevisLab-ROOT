@@ -3,6 +3,7 @@ void plottingFunction(){
     TCanvas *c1 = new TCanvas();
     f->Draw();
     c1->Draw();
+    c1->SaveAs("CPP/OUTPUTS/TF1.png");
 }
 
 void excercise1(){
@@ -10,6 +11,7 @@ void excercise1(){
     TCanvas *c1 = new TCanvas();
     f->Draw("surf1");
     c1->Draw();
+    c1->SaveAs("CPP/OUTPUTS/TF2.png");
 }
 
 void histogram(){
@@ -18,6 +20,7 @@ void histogram(){
     TCanvas *c1 = new TCanvas();
     h->Draw();
     c1->Draw();
+    c1->SaveAs("CPP/OUTPUTS/TH1D.png");
 }
 
 void customHistogram(){
@@ -27,6 +30,7 @@ void customHistogram(){
     TCanvas *c1 = new TCanvas();
     h->Draw("e");
     c1->Draw();
+    c1->SaveAs("CPP/OUTPUTS/TH1D_custom.png");
 }
 
 void fittingHistToGaus(){
@@ -37,6 +41,7 @@ void fittingHistToGaus(){
     h->Draw();
     gStyle->SetOptFit(0001); // To display the fit results
     c1->Draw();
+    c1->SaveAs("CPP/OUTPUTS/TH1D_fit.png");
 }
 
 void fittingHistogramCustom(){
@@ -44,7 +49,10 @@ void fittingHistogramCustom(){
     TH1D* h1 = (TH1D*)file1->Get("hist2");
     TF1* myFunc = new TF1("myFunc", "gaus(0) + gaus(3)", 0, 14) ;
     myFunc->SetParameters(5., 2., 1., 1., 10., 1.);
+    TCanvas *c1 = new TCanvas();
     // myFunc->Draw();
     h1->Fit("myFunc");
     h1->Draw();
+    c1->Draw();
+    c1->SaveAs("CPP/OUTPUTS/TH1D_custom_fit.png");
 }
