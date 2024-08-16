@@ -106,5 +106,4 @@ void Analyze::Terminate()
    ebeamHist->GetXaxis()->SetTitle("ebeam");
    ebeamHist->GetYaxis()->SetTitle("number of events");
    ebeamHist->Draw();
-
 }

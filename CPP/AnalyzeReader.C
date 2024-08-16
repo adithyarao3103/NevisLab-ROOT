@@ -53,4 +53,6 @@ void AnalyzeReader() {
     zvHist_withCut->Draw();
 
     std::cout<<"Number of zv<20: "<<zvCount;
+
+    c->SaveAs("CPP/OUTPUTS/analyzeReader_cuts.png");
 }
