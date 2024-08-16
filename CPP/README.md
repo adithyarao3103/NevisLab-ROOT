@@ -1,6 +1,6 @@
 # ROOT in CPP
 
-[OUTPUTS](OUTPUTS) folder contains the outputs of the macros.
+[OUTPUTS](OUTPUTS) folder contains the outputs of the macros. ([output.root](OUTPUTS/output.root) has the output histograms in .root format)
 
  - [basics.C](basics.C) - Contains the basic function and histogram plotting macros
  - [scatterPlots_cuts.C](scatterPlots_cuts.C) - macros for reading TTree from files and creating scatter plots and applying cuts on the TTree data. This has two macros - one which plots different histograms on the same canvas in different pads, another which uses `std::vector` to dynamically create canvases for each plot.
